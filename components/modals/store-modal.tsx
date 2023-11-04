@@ -1,11 +1,12 @@
 "use client"
 
 import * as z from "zod"
-
+import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 import { Modal } from "@/components/ui/modal";
 import { Input } from "@/components/ui/input";
@@ -24,8 +25,6 @@ export const StoreModal = () => {
 
     const [loading, setLoading] = useState(false);
 
-    
-
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -34,16 +33,17 @@ export const StoreModal = () => {
     });
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        console.log(values);
-        // try {
-        //   setLoading(true);
-        //   const response = await axios.post('/api/stores', values);
-        //   window.location.assign(`/${response.data.id}`);
-        // } catch (error) {
-        //   toast.error('Something went wrong');
-        // } finally {
-        //   setLoading(false);
-        // }
+        try {
+          setLoading(true);
+          const response = await axios.post('/api/stores', values);
+          toast.success("Store created.")
+          //window.location.assign(`/${response.data.id}`);
+        } catch (error) {
+          console.log(error);
+          toast.error('Something went wrong');
+        } finally {
+          setLoading(false);
+        }
     };
 
     return (
