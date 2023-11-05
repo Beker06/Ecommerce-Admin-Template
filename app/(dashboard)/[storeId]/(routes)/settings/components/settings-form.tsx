@@ -23,7 +23,7 @@ import {
 import { Heading } from "@/components/ui/heading"
 import { Separator } from "@/components/ui/separator"
 import { AlertModal } from "@/components/modals/alert_modal"
-// import { ApiAlert } from "@/components/ui/api-alert"
+import { ApiAlert } from "@/components/ui/api-alert"
 // import { useOrigin } from "@/hooks/use-origin"
 
 const formSchema = z.object({
@@ -122,11 +122,12 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
                 </form>
             </Form>
             <Separator />
-            {/* <ApiAlert 
-                title="NEXT_PUBLIC_API_URL" 
+            <ApiAlert 
+                title="NEXT_PUBLIC_API_URL"
+                description = 'test test'
                 variant="public" 
-                description={`${origin}/api/${params.storeId}`}
-            /> */}
+                // description={`${origin}/api/${params.storeId}`}
+            />
         </>
     )
 }
