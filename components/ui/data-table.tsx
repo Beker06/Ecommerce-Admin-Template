@@ -86,8 +86,12 @@ export function DataTable<TData, TValue>({
                                     data-state={row.getIsSelected() && "selected"}
                                 >
                                     {row.getVisibleCells().map((cell) => (
-                                        <TableCell key={cell.id}>
-                                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                        <TableCell 
+                                            key={cell.id}
+                                        >
+                                            <span className={`${cell.column.id == "isPaid" ? `text-white px-1 rounded-lg ${cell.getValue() == true ? 'bg-green-600' : 'bg-red-500'}` : ''}`}>
+                                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                            </span>
                                         </TableCell>
                                     ))}
                                 </TableRow>
